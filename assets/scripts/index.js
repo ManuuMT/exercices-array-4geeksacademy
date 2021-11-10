@@ -13,6 +13,8 @@ function Point(x, y) {
 function cleanArray(myArray) {
     arrayFixed = [];
     for (let i in myArray) {
+        // Si el elemento del array cumple con la condicion
+        // es pusheado dentro de la nueva array limpia
         if (typeof myArray[i] == 'number') {
             arrayFixed.push(myArray[i]);
         }
@@ -25,13 +27,18 @@ function cleanArray(myArray) {
 function findNumber(myArray, number) {
 
     let arrayOfIndex = [];
+    // Almaceno en index el resultado de aplicarle el metodo indexOf al array
+    // Si encuentra el numero buscado, la funcion devuelve su posicion
+    // De lo contrario devuelve -1
     let index = myArray.indexOf(number);
+    if (index == -1) return "Número no encontrado";
 
+    // Mientras que index sea distinto de -1, es decir, mientras siga encontrando al numero
+    // Vamos a pushear en myArray las posiciones donde se encuentre 
     while (index != -1) {
         arrayOfIndex.push(index);
         index = myArray.indexOf(number, index + 1);
     }
-
     return "El número " + number + " está en los índices " + arrayOfIndex;
 }
 // ↓ Des-comentar para llamar a la funcion
@@ -41,6 +48,9 @@ function findNumber(myArray, number) {
 // Ej 1: Encontrar número con programacion declarativa
 function findNumberBetter(myArray, number) {
     let arrayOfIndex = [];
+
+    // Mapeo el array y donde encuentre values igual al numero buscado
+    // Se agrega al array la posicion del numero, mediante el metodo push
     myArray.map((value, index) => {
         if (value == number) arrayOfIndex.push(index);
     })
@@ -63,13 +73,19 @@ let cleanedArray = shit.filter((value) => typeof value == 'string');
 function calculateDistance(obj, obj2) {
     finalObj = {};
     for (let i in obj2) {
+        console.log(i);
+        // Llamaremos a la funcion auxDistance por cada  
+        // elemento que haya dentro del segundo objeto
         auxDistance(i, obj, obj2);
     }
     return finalObj;
 }
 
 function auxDistance(i, obj, obj2) {
+    // Si dentro del objeto 1 existe la propiedad indicada
     if (obj.hasOwnProperty(i)) {
+        // Creamos una clave con ese nombre en un nuevo objeto, luego
+        // le asignamos como valor la diferencia entre las claves del obj1 y obj2
         finalObj[i] = (obj2[i]) - (obj[i]);
     }
 }
@@ -104,31 +120,38 @@ function compareArrays(myArray, myArray2) {
 // Funcion que convierte una array de arrays en una unica array que facilita la comparacion
 function convertIntoSimpleArray(array) {
     let simpleArray = [];
+    // Recorremos el array concatenando cada subindice en un nuevo array 
+    // De esta manera obtendremos un nuevo array descompuesto   
     for (let i in array) simpleArray = simpleArray.concat(array[i]);
     return simpleArray;
 }
 
 // Funcion que encuentra al array de menor longitud
 function findIndex(array, array2) {
+    // Asignamos la longitud por defecto a la del primer array
     let long = array.length;
+    // Comparamos longitudes entre arrays. La que sea menor será asignada a long
+    // En caso de ser iguales, ya tendriamos asignado un valor anteriormente
     if (array.length < array2.length) long = array.length;
     if (array.length > array2.length) long = array2.length;
 
     return long;
 }
 
-// Funcion que comparar los elementos entre 2 arrays
+// Funcion que compara los elementos entre 2 arrays
 function arrayOfBooleans(array, array2, index) {
     let arrayBool = [];
     for (let i = 0; i < index; i++) {
+        // Si los elementos son iguales, pusheamos un true en el array
         if (array[i] === array2[i]) {
             arrayBool.push(true);
         }
+        // De lo contrario, pusheamos un false
         else arrayBool.push(false);
     }
+    // Finalmente retornamos nuestro array compuesto unicamente de booleanos
     return arrayBool;
 }
 
 // ↓ Des-comentar para llamar a la funcion
 //compareArrays(exampleArray, exampleArray2);
-
